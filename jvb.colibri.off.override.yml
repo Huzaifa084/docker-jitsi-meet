@@ -1,0 +1,4 @@
+services:
+  jvb:
+    ports:
+      - "10000:10000/udp"

@@ -1,0 +1,30 @@
+services:
+  jibri:
+    image: jitsi/jibri:unstable
+    restart: unless-stopped
+    environment:
+      - TZ=UTC
+      - PUBLIC_URL=https://meet.funnelskingdom.com
+      - XMPP_SERVER=prosody
+      - XMPP_DOMAIN=meet.jitsi
+      - XMPP_AUTH_DOMAIN=auth.meet.jitsi
+      - XMPP_INTERNAL_MUC_DOMAIN=internal-muc.meet.jitsi
+      - XMPP_RECORDER_DOMAIN=recorder.meet.jitsi
+      - JIBRI_XMPP_USER=jibri
+      - JIBRI_XMPP_PASSWORD=ab47bb7d895d52e4974e744558330fb4
+      - JIBRI_RECORDER_USER=recorder
+      - JIBRI_RECORDER_PASSWORD=78d15371bd0827cbef3f346ab50b0a2c
+      - JIBRI_BREWERY_MUC=jibribrewery
+      - JIBRI_PENDING_TIMEOUT=90
+      - JIBRI_STRIP_DOMAIN_JID=muc
+      - JIBRI_LOGS_DIR=/config/logs
+      - DISPLAY=:0
+    shm_size: 2gb
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - /jibri:/config
+      - /recordings:/config/recordings
+      - /dev/shm:/dev/shm
+    networks:
+      - meet.jitsi
